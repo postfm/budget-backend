@@ -1,0 +1,9 @@
+# Создание нового пользователя
+# @name register
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "keks@gmail.local",
+  "password": "123456"
+}
