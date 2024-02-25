@@ -1,9 +1,7 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Param,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -18,10 +16,5 @@ export class UsersController {
   @UsePipes(new ValidationPipe())
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
   }
 }
