@@ -1,4 +1,5 @@
 @AToken={{login.response.body.token}}
+@userId={{login.response.body.id}}
 
 # Создание нового пользователя
 POST http://localhost:3000/api/users HTTP/1.1
@@ -22,6 +23,96 @@ Content-Type: application/json
 }
 
 ###
-# Авторизация пользователя
+# Вход в приложение
 GET  http://localhost:3000/api/auth/profile HTTP/1.1
 Authorization: Bearer {{AToken}}
+
+###
+# Создание категории
+POST http://localhost:3000/api/categories HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+{
+  "title":"Gift"
+}
+
+###
+# Получение всех категорий
+GET  http://localhost:3000/api/categories HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+###
+# Получение категории по Id
+GET  http://localhost:3000/api/categories/category/2 HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+###
+# Изменение категории по Id
+PATCH http://localhost:3000/api/categories/category/1 HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+{
+  "title":"Gift"
+}
+
+###
+# Изменение категории по Id
+DELETE  http://localhost:3000/api/categories/category/1 HTTP/1.1
+Authorization: Bearer {{AToken}}
+
+###
+# Создание транзакции
+POST http://localhost:3000/api/transactions HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+{
+  "title": "April",
+  "amount": 5000,
+  "type": "income",
+  "category": {"id": 2}
+}
+
+###
+# Получение всех транзакций
+GET  http://localhost:3000/api/transactions HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+###
+# Получение транзакции по Id
+GET  http://localhost:3000/api/transactions/transaction/1 HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+###
+# Изменение транзакции по Id
+PATCH   http://localhost:3000/api/transactions/transaction/1 HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+{
+  "amount": 1500
+}
+
+###
+# Изменение транзакции по Id
+DELETE http://localhost:3000/api/transactions/transaction/4 HTTP/1.1
+Authorization: Bearer {{AToken}}
+
+###
+# Получение транзакций с пагинацией
+GET  http://localhost:3000/api/transactions/pagination?page=2&limit=2 HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
+###
+# Получение итогов по типу транзакции
+GET  http://localhost:3000/api/transactions/income/find HTTP/1.1
+Authorization: Bearer {{AToken}}
+Content-Type: application/json
+
